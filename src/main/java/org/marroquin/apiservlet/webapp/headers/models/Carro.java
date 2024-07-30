@@ -39,4 +39,30 @@ public class Carro {
         //Realiza un mapeo y convierte en un int cada metodo getImporte de cada itemCarro, para despues sumar todos lo importe de cada itemCarro
         return items.stream().mapToInt(ItemCarro:: getImporte).sum();
     }
+
+    //eliminar productos
+    public void removeProductos(List<String> productoIds) {
+        if (productoIds != null) {
+              productoIds.forEach(productoId -> removeProducto(productoId));
+        }
+    }
+
+    //Eliminar un producto especifico por id
+    public void removeProducto(String productoId) {
+        Optional<ItemCarro> producto = findProducto(productoId);
+        producto.ifPresent(itemCarro -> items.remove(itemCarro));
+    }
+
+    //actualiza la cantidad de un producto
+    public void updateCantidad(String productoId, int cantidad) {
+        Optional<ItemCarro> producto = findProducto(productoId);
+        producto.ifPresent(itemCarro -> itemCarro.setCantidad(cantidad));
+    }
+
+    //encontrar producto por id
+    private Optional<ItemCarro> findProducto(String productoId) {
+        return  items.stream()
+                .filter(itemCarro -> productoId.equals(Long.toString(itemCarro.getProducto().getId())))
+                .findAny();
+    }
 }

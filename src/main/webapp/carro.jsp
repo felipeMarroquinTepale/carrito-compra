@@ -13,6 +13,7 @@ Carro carro = (Carro) session.getAttribute("carro");
     <%if(carro == null || carro.getItems().isEmpty()){%>
         <p>Lo sentimos no hay productos en el carro de compras!</p>
     <%}else{%>
+ <form name="formcarro" action="<%=request.getContextPath()%>/actualizar-carro" method="post">
         <table>
             <tr>
                 <th>Id</th>
@@ -20,6 +21,7 @@ Carro carro = (Carro) session.getAttribute("carro");
                 <th>Precio</th>
                 <th>Cantidad</th>
                 <th>Total</th>
+                <th>Borrar</th>
             </tr>
             <%for(ItemCarro item: carro.getItems()){%>
                 <tr>
@@ -28,6 +30,7 @@ Carro carro = (Carro) session.getAttribute("carro");
                     <td><%=item.getProducto().getPrecio()%></td>
                     <td><%=item.getCantidad()%></td>
                     <td><%=item.getImporte()%></td>
+                    <td><input type="checkbox" value="<%=item.getProducto().getId()%>" name="deleteProductos" /></td>
                 </tr>
             <%}%>
 
@@ -36,6 +39,7 @@ Carro carro = (Carro) session.getAttribute("carro");
                 <td><%=carro.getTotal()%></td>
             </tr>
         </table>
+            <a href="javascript:document.formcarro.submit();">Actualizar</a>
     <%}%>
     <p><a href="<%=request.getContextPath()%>/productos">Seguir comprando</a></p>
     <p><a href="<%=request.getContextPath()%>/index.html">Volver</a></p>
