@@ -28,7 +28,7 @@ Carro carro = (Carro) session.getAttribute("carro");
                     <td><%=item.getProducto().getId()%></td>
                     <td><%=item.getProducto().getNombre()%></td>
                     <td><%=item.getProducto().getPrecio()%></td>
-                    <td><%=item.getCantidad()%></td>
+                    <td><input type="text" size="4" name="cant_<%=item.getProducto().getId()%>" value="<%=item.getCantidad()%>" /></td>
                     <td><%=item.getImporte()%></td>
                     <td><input type="checkbox" value="<%=item.getProducto().getId()%>" name="deleteProductos" /></td>
                 </tr>
